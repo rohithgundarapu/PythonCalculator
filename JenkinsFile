@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/rohithgundarapu/pythontest.git'
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                bat 'python -m py_compile calculator.py'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'python -m unittest'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Application deployed successfully'
+            }
+        }
+    }
+}
